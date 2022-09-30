@@ -22,7 +22,7 @@
     if (newTodo === "") {
       console.log("내용을 입력하세요");
     } else {
-      console.log(newTodo);
+      todoLists = [...todoLists, { text: newTodo }];
     }
   }
 </script>

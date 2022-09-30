@@ -11,9 +11,9 @@
 
   // let visible = true;
   let todoLists = [
-    { text: "리스트1" },
-    { text: "리스트2" },
-    { text: "리스트3" },
+    { checked: false, text: "리스트1" },
+    { checked: false, text: "리스트2" },
+    { checked: false, text: "리스트3" },
   ];
 
   let newTodo = "";
@@ -22,8 +22,13 @@
     if (newTodo === "") {
       console.log("내용을 입력하세요");
     } else {
-      todoLists = [...todoLists, { text: newTodo }];
+      todoLists = [...todoLists, { checked: false, text: newTodo }];
     }
+  }
+
+  function removeTodo(targetTodo) {
+    let todo = todoLists.findIndex((e) => e.text === targetTodo.text);
+    todoLists[todo]["checked"] = !todoLists[todo]["checked"];
   }
 </script>
 
@@ -67,8 +72,14 @@
   <h1>투두리스트</h1>
 
   <div>
+    <!-- bind:checked={removeTodo(todoList.text)} -->
     {#each todoLists as todoList}
-      <label><input type="checkbox" value={todoList} />{todoList.text}</label
+      <label class:checked={todoList.checked === true}
+        ><input
+          on:click={() => removeTodo(todoList)}
+          type="checkbox"
+          value={todoList}
+        />{todoList.text}</label
       ><br />
     {/each}
   </div>
@@ -80,6 +91,10 @@
 </main>
 
 <style>
+  .checked {
+    color: #ddd;
+    text-decoration: line-through;
+  }
   /* .logo {
     height: 6em;
     padding: 1.5em;

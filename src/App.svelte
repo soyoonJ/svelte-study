@@ -1,18 +1,33 @@
 <script>
-  import svelteLogo from "./assets/svelte.svg";
-  import Counter from "./lib/Counter.svelte";
+  // import svelteLogo from "./assets/svelte.svg";
+  // import Counter from "./lib/Counter.svelte";
 
-  let name = "world";
+  // let name = "world";
 
-  let count = 0;
-  function handleClick() {
-    count += 1;
+  // let count = 0;
+  // function handleClick() {
+  //   count += 1;
+  // }
+
+  // let visible = true;
+  let todoLists = [
+    { text: "리스트1" },
+    { text: "리스트2" },
+    { text: "리스트3" },
+  ];
+
+  let newTodo = "";
+
+  function handleSubmit() {
+    if (newTodo === "") {
+      console.log("내용을 입력하세요");
+    } else {
+      console.log(newTodo);
+    }
   }
-
-  let visible = true;
 </script>
 
-<main>
+<!-- <main>
   <h1>Hello {name}!</h1>
 
   {#if visible}
@@ -47,10 +62,25 @@
   </p>
 
   <p class="read-the-docs">Click on the Vite and Svelte logos to learn more</p>
+</main> -->
+<main>
+  <h1>투두리스트</h1>
+
+  <div>
+    {#each todoLists as todoList}
+      <label><input type="checkbox" value={todoList} />{todoList.text}</label
+      ><br />
+    {/each}
+  </div>
+
+  <form on:submit|preventDefault={handleSubmit}>
+    <input bind:value={newTodo} placeholder="할 일을 입력해주세요" />
+    <button type="submit">추가</button>
+  </form>
 </main>
 
 <style>
-  .logo {
+  /* .logo {
     height: 6em;
     padding: 1.5em;
     will-change: filter;
@@ -63,5 +93,5 @@
   }
   .read-the-docs {
     color: #888;
-  }
+  } */
 </style>

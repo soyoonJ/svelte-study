@@ -29,9 +29,16 @@
     }
   }
 
-  function removeTodo(targetTodo) {
+  function toggleTodo(targetTodo) {
     let todo = todoLists.findIndex((e) => e.text === targetTodo.text);
     todoLists[todo]["checked"] = !todoLists[todo]["checked"];
+  }
+
+  function removeTodo(todoList) {
+    if (window.confirm(`${todoList.text}를 삭제하시겠습니까?`)) {
+      todoLists = todoLists.filter((e) => e !== todoList);
+    } else {
+    }
   }
 </script>
 
@@ -75,16 +82,19 @@
   <h1>투두리스트</h1>
 
   <div>
-    <!-- bind:checked={removeTodo(todoList.text)} -->
+    <!-- bind:checked={toggleTodo(todoList.text)} -->
     {#each todoLists as todoList}
-      <label class:checked={todoList.checked === true}>
-        <input
-          on:click={() => removeTodo(todoList)}
-          type="checkbox"
-          value={todoList}
-        />
-        {todoList.text}
-      </label>
+      <div class="todo_align">
+        <label class:checked={todoList.checked === true}>
+          <input
+            on:click={() => toggleTodo(todoList)}
+            type="checkbox"
+            value={todoList}
+          />
+          {todoList.text}
+        </label>
+        <button on:click={() => removeTodo(todoList)}>삭제🗑️</button>
+      </div>
       <br />
     {/each}
   </div>
@@ -96,6 +106,11 @@
 </main>
 
 <style>
+  .todo_align {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   .checked {
     color: #ddd;
     text-decoration: line-through;

@@ -10,6 +10,8 @@
   // }
 
   // let visible = true;
+
+  // 마지막 id 기준으로 더해서 넣는 방법도 있음
   let todoLists = [
     { checked: false, text: "리스트1" },
     { checked: false, text: "리스트2" },
@@ -23,6 +25,7 @@
       console.log("내용을 입력하세요");
     } else {
       todoLists = [...todoLists, { checked: false, text: newTodo }];
+      newTodo = "";
     }
   }
 
@@ -74,13 +77,15 @@
   <div>
     <!-- bind:checked={removeTodo(todoList.text)} -->
     {#each todoLists as todoList}
-      <label class:checked={todoList.checked === true}
-        ><input
+      <label class:checked={todoList.checked === true}>
+        <input
           on:click={() => removeTodo(todoList)}
           type="checkbox"
           value={todoList}
-        />{todoList.text}</label
-      ><br />
+        />
+        {todoList.text}
+      </label>
+      <br />
     {/each}
   </div>
 

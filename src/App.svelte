@@ -41,10 +41,6 @@
     // todoLists = todoLists;
   }
 
-  function updateTodo(todoList) {
-    const targetTodoIndex = todoLists.findIndex((e) => e === todoList);
-  }
-
   function completeAll() {
     todoLists = todoLists.map((e) => ({ checked: true, text: e.text }));
     remaining = 0;
@@ -60,7 +56,8 @@
   <h1>투두리스트</h1>
 
   <div>
-    {#each filteredTodoLists as todoList}
+    <!-- {#each filteredTodoLists as todoList} -->
+    {#each todoLists as todoList}
       <Todo
         todo={todoList}
         on:removeTodo={removeTodo}

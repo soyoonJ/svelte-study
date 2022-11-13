@@ -1,11 +1,12 @@
 <script>
+  export let todo;
+
   import { createEventDispatcher } from "svelte";
   const dispatch = createEventDispatcher();
 
   let isUpdate = false;
 
   function toggleTodo(targetTodo) {
-    // targetTodo.checked = !targetTodo.checked;
     dispatch("toggleTodo", {
       todoList: targetTodo,
     });
@@ -28,8 +29,6 @@
   function cancelTodoUpdate(todo) {
     isUpdate = false;
   }
-
-  export let todo;
 </script>
 
 <div class="todo_align">

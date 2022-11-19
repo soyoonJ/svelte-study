@@ -5,6 +5,7 @@
   const dispatch = createEventDispatcher();
 
   let isUpdate = false;
+  let updateContent = "";
 
   function toggleTodo(targetTodo) {
     dispatch("toggleTodo", {
@@ -12,7 +13,9 @@
     });
   }
   function rewriteTodo(todo) {
+    console.log(todo);
     isUpdate = true;
+    updateContent = todo.text;
   }
   function removeTodo(todo) {
     if (window.confirm(`${todo.text}를 삭제하시겠습니까?`)) {
@@ -23,10 +26,11 @@
     }
   }
 
-  function updateTodo(todo) {
+  function updateTodo(updateContent) {
     isUpdate = false;
+    todo.text = updateContent;
   }
-  function cancelTodoUpdate(todo) {
+  function cancelTodoUpdate() {
     isUpdate = false;
   }
 </script>
@@ -34,7 +38,6 @@
 <div class="todo_align">
   {#if !isUpdate}
     <label class:checked={todo.checked}>
-      <!-- <input on:click={() => toggleTodo(todo)} type="checkbox" value={todo} /> -->
       <input
         on:click={() => toggleTodo(todo)}
         bind:checked={todo.checked}
@@ -47,12 +50,10 @@
     <button on:click={() => rewriteTodo(todo)}>수정✍️</button>
     <button on:click={() => removeTodo(todo)}>삭제🗑️</button>
   {:else}
-    <!-- 다시 포커스 됐을 때 데이터 이상해짐 -->
-    <input bind:value={todo.text} />
-    <!-- on:focus={() => (updateBackup = todo.text)} -->
+    <input bind:value={updateContent} />
 
-    <button on:click={() => cancelTodoUpdate(todo)}>취소</button>
-    <button on:click={() => updateTodo(todo)}>저장✍️</button>
+    <button on:click={() => cancelTodoUpdate()}>취소</button>
+    <button on:click={() => updateTodo(updateContent)}>저장✍️</button>
   {/if}
 </div>
 <br />

@@ -1,5 +1,4 @@
 <script>
-  // TODO: 업데이트 취소기능 보완
   import { todoLists } from "./stores";
   import Todo from "./Todo.svelte";
 
@@ -7,7 +6,7 @@
 
   function handleSubmit() {
     if (newTodo === "") {
-      console.log("내용을 입력하세요");
+      alert("내용을 입력하세요");
     } else {
       $todoLists = [...$todoLists, { checked: false, text: newTodo }];
       newTodo = "";

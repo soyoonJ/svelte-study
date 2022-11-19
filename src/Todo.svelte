@@ -12,11 +12,6 @@
       todoList: targetTodo,
     });
   }
-  function updateTodo(todo) {
-    console.log(todo);
-    isUpdate = true;
-    updateContent = todo.text;
-  }
   function removeTodo(todo) {
     if (window.confirm(`${todo.text}를 삭제하시겠습니까?`)) {
       dispatch("removeTodo", {
@@ -26,6 +21,10 @@
     }
   }
 
+  function updateTodo(todo) {
+    isUpdate = true;
+    updateContent = todo.text;
+  }
   function updateConfirm(updateContent) {
     isUpdate = false;
     todo.text = updateContent;

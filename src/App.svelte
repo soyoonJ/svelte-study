@@ -12,11 +12,11 @@
       newTodo = "";
     }
   }
+
+  // [Region] : Dispatch from Todo.svelte
   function removeTodo(event) {
     $todoLists = $todoLists.filter((e) => e !== event.detail.targetTodo);
   }
-
-  let remaining = $todoLists.filter((e) => !e.checked).length;
   function toggleTodo(event) {
     event.detail.todoList.checked = !event.detail.todoList.checked;
     // remianing, filteredTodoLists $ 문법으로 사용 시, 하단 코드 없으면 동작 안함
@@ -24,6 +24,7 @@
     filterTodo($todoLists, currentFilter);
   }
 
+  // [Region] Handle Todo easily
   function completeAll() {
     $todoLists = $todoLists.map((e) => ({ checked: true, text: e.text }));
     remaining = 0;
@@ -32,6 +33,7 @@
     $todoLists = $todoLists.filter((e) => !e.checked);
   }
 
+  // [Region] Filter Todo
   let currentFilter = "all";
 
   function filterTodo($todoLists, selectedMode) {

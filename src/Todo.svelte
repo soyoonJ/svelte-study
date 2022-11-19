@@ -12,7 +12,7 @@
       todoList: targetTodo,
     });
   }
-  function rewriteTodo(todo) {
+  function updateTodo(todo) {
     console.log(todo);
     isUpdate = true;
     updateContent = todo.text;
@@ -26,11 +26,11 @@
     }
   }
 
-  function updateTodo(updateContent) {
+  function updateConfirm(updateContent) {
     isUpdate = false;
     todo.text = updateContent;
   }
-  function cancelTodoUpdate() {
+  function updateCancel() {
     isUpdate = false;
   }
 </script>
@@ -47,13 +47,13 @@
       {todo.text}
     </label>
 
-    <button on:click={() => rewriteTodo(todo)}>수정✍️</button>
+    <button on:click={() => updateTodo(todo)}>수정✍️</button>
     <button on:click={() => removeTodo(todo)}>삭제🗑️</button>
   {:else}
     <input bind:value={updateContent} />
 
-    <button on:click={() => cancelTodoUpdate()}>취소</button>
-    <button on:click={() => updateTodo(updateContent)}>저장✍️</button>
+    <button on:click={() => updateCancel()}>취소</button>
+    <button on:click={() => updateConfirm(updateContent)}>저장✍️</button>
   {/if}
 </div>
 <br />
